@@ -6,6 +6,7 @@ import NewPost from "./NewPost"
 import PostPage from "./PostPage"
 import About from "./About"
 import Missing from "./Missing"
+import { format } from 'date-fns'
 /* import { Route, Switch, useHistory } from "react-router-dom" */
 import {
   BrowserRouter as Router,
@@ -16,11 +17,47 @@ import {
 import { useState, useEffect } from "react"
 
 
+
 function App() {
+  const [search, setSearch] = useState('')
+  const [posts, setPosts] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+  const [postTitle, setPostTitle] = useState('')
+  const [postBody, setPostBody] = useState('')
+
+  const history = useHistory()
+
+  useEffect(() => {
+    const filteredResults = posts.filter(post => 
+      ((post.body).toLowerCase()).includes(search.toLowerCase())
+      || ((post.title).toLowerCase()).includes(search.toLowerCase())
+      )
+
+      setSearchResults(filteredResults.reverse())
+  }, [posts, search])
+  const handleSubmit = (e) => {
+    e.preventDefualt()
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1
+    const datetime = format(new Date(), 'MMMM dd, yyyy pp')
+    const newPost = { id, title: postTitle, datetime, body: postBody }
+    const allPosts = [ ...posts, newPost ]
+    setPosts(allPosts)
+    setPostTitle('')
+    setPostBody('')
+    history.push('/')
+  }
+
+  const handleDelete = (id) => {
+    const postsList = posts.filter(post => post.id !== id)
+    setPosts(postsList)
+    history.push('/')
+  }
+
+
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header title="React Blog"/>
 
         <Nav />
         <Routes>
@@ -45,16 +82,22 @@ function App() {
   /* return (
     <div className="App">
       <Header />
-      <Nav />
+      <Nav search={search} setSearch={setSearch} />
       <Switch>
         <Route path="/">
-          <Home />
+          <Home posts={searchResults} />
         </Route>
         <Route path="/post">
-          <NewPost />
+          <NewPost 
+            handleSubmit={handleSubmit}
+            postTitle={postTitle}
+            setPostTitle={setPostTitle}
+            postBody={postBody}
+            setPostBody={setPostBody}
+          />
         </Route>
         <Route path="/post/:id">
-          <PostPage />
+          <PostPage posts={post} handleDelete={handleDelete} />
         </Route>
         <Route path="/about" Component={About} />
         <Route path="*" Component={Missing} />
