@@ -1,17 +1,17 @@
 import React from 'react'
-import { useParams, Link, useHistory } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 
 const PostPage = () => {
     const { id } = useParams()
-    const history = useHistory()
+    const navigate = useNavigate()
     const deletePost = useStoreActions((action) => useStoreActions.deletePost)
     const getPostById = useStoreState((state) => state.getPostById)
     const post = getPostById(id)
 
     const handleDelete = (id) => {
       deletePost(id)
-      history.push('/')
+      navigate('/')
     }
 
   return (

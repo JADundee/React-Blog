@@ -1,19 +1,17 @@
-import Header from "./components/Header"
-import Nav from "./components/Nav"
-import Footer from "./components/Footer"
 import Home from "./components/Home"
 import NewPost from "./components/NewPost"
 import PostPage from "./components/PostPage"
 import EditPost from "./components/EditPost"
 import About from "./components/About"
 import Missing from "./components/Missing"
-import { Route, Switch } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import { useEffect } from "react"
 import useAxiosFetch from "./hooks/useAxiosFetch"
 import { useStoreActions } from "easy-peasy"
+import Layout from "./Layout"
 
 function App() {
-  const setPosts = useStoreActions((actions) => actions.setPost)
+  const setPosts = useStoreActions((actions) => actions.setPosts)
   const { data, fetchError, isLoading } = useAxiosFetch(`http://localhost:3500/posts`)
   
     useEffect(() => {
@@ -21,24 +19,21 @@ function App() {
     }, [data, setPosts])
 
   return (
-    <div className="App">
-        <Header title="React Blog"/>
-            <Nav />
-            <Switch>
-              <Route path="/">
-                <Home
-                isLoading={isLoading}
-                fetchError={fetchError}
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home 
+                  isLoading={isLoading}
+                  fetchError={fetchError}
+                />}
                 />
+                <Route path="posts"></Route>
               </Route>
-              <Route path="/post" Component={NewPost} />
-              <Route path="/edit/:id" Component={EditPost} />
-              <Route path="/post/:id" Component={PostPage} />
-              <Route path="/about" Component={About} />
-              <Route path="*" Component={Missing} />
-            </Switch>
-        <Footer />
-    </div>
+              <Route index path="post" element={<NewPost />} />
+              <Route path="/edit/:id" element={<EditPost />} />
+              <Route path="/post/:id" element={<PostPage />} />
+              <Route path="about" element={<About />} />
+              <Route path="*" element={<Missing />} />
+            </Routes>
   );
 }
 

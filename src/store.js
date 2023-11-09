@@ -30,7 +30,7 @@ export default createStore({
     setSearchResults: action((state, payload) => {
         state.searchResults = payload
     }),
-    postCount: compound((state) => state.post.length),
+    postCount: computed((state) => state.posts.length),
     getPostById: computed((state) => {
         return (id) => state.posts.find(post => (post.id).toString() === id)
     }),
@@ -49,7 +49,7 @@ export default createStore({
         const { posts } = helpers.getState()
         try {
             await api.delete(`/posts/${id}`)
-          setPosts(posts.filter(post => post.id !== id))
+          actions.setPosts(posts.filter(post => post.id !== id))
         } catch (err) {
           console.log(`Error: ${err.message}`)
         }
