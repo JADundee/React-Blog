@@ -21,7 +21,6 @@ function App() {
     }, [data, setPosts])
 
   return (
-
     <Routes>
     <Route path="/" element={<Layout
       search={search}
@@ -41,23 +40,6 @@ function App() {
       <Route path="*" element={<Missing />} />
     </Route>
   </Routes>
-          /*   <Routes>
-              <Route path="/" element={<Layout 
-              search={search}
-              setSearch={setSearch}/>}>
-                <Route index element={<Home 
-                  isLoading={isLoading}
-                  fetchError={fetchError}
-                />}>
-                
-              </Route>
-              <Route index path="/post" element={<NewPost />} />
-              <Route path="/edit/:id" element={<EditPost />} />
-              <Route path="/post/:id" element={<PostPage />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/*" element={<Missing />} />
-              </Route>
-            </Routes> */
   );
 }
 
