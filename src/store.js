@@ -6,23 +6,23 @@ export default createStore({
     setPosts: action((state, payload) => {
         state.posts = payload
     }),
-    postTitle: [],
+    postTitle: '',
     setPostTitle: action((state, payload) => {
         state.postTitle = payload
     }),
-    postBody: [],
+    postBody: '',
     setPostBody: action((state, payload) => {
         state.postBody = payload
     }),
-    editTitle: [],
+    editTitle: '',
     setEditTitle: action((state, payload) => {
         state.editTitle = payload
     }),
-    editBody: [],
+    editBody: '',
     setEditBody: action((state, payload) => {
         state.editBody = payload
     }),
-    search: [],
+    search: '',
     setSearch: action((state, payload) => {
         state.search = payload
     }),
@@ -38,7 +38,7 @@ export default createStore({
         const { posts } = helpers.getState()
         try {
             const response = await api.post(`/posts`, newPost)
-            actions.setPosts(...posts, response.data)
+            actions.setPosts([...posts, response.data])
             actions.setPostTitle('')
             actions.setPostBody('')
           } catch (err) {

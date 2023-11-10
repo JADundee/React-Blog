@@ -7,10 +7,12 @@ import Missing from "./components/Missing"
 import { Route, Routes } from "react-router-dom"
 import { useEffect } from "react"
 import useAxiosFetch from "./hooks/useAxiosFetch"
-import { useStoreActions } from "easy-peasy"
 import Layout from "./Layout"
+import { useStoreState, useStoreActions } from "easy-peasy"
 
 function App() {
+  const search = useStoreState((state) => state.search)
+  const setSearch = useStoreActions((actions) => actions.setSearch)
   const setPosts = useStoreActions((actions) => actions.setPosts)
   const { data, fetchError, isLoading } = useAxiosFetch(`http://localhost:3500/posts`)
   
@@ -19,21 +21,42 @@ function App() {
     }, [data, setPosts])
 
   return (
-            <Routes>
-              <Route path="/" element={<Layout />}>
+
+    <Routes>
+    <Route path="/" element={<Layout
+      search={search}
+      setSearch={setSearch}
+    />}>
+      <Route index element={<Home 
+      isLoading={isLoading}
+      fetchError={fetchError}
+      />} />
+      <Route path="post">
+        <Route index element={<NewPost/>} />
+        <Route path="edit/:id" element={ <EditPost />} />
+        <Route path=":id" element={<PostPage />} />
+      </Route>
+      <Route path="about" element={<About />} />
+      <Route path="*" element={<Missing />} />
+    </Route>
+  </Routes>
+          /*   <Routes>
+              <Route path="/" element={<Layout 
+              search={search}
+              setSearch={setSearch}/>}>
                 <Route index element={<Home 
                   isLoading={isLoading}
                   fetchError={fetchError}
-                />}
-                />
-                <Route path="posts"></Route>
+                />}>
+                
               </Route>
-              <Route index path="post" element={<NewPost />} />
+              <Route index path="/post" element={<NewPost />} />
               <Route path="/edit/:id" element={<EditPost />} />
               <Route path="/post/:id" element={<PostPage />} />
-              <Route path="about" element={<About />} />
-              <Route path="*" element={<Missing />} />
-            </Routes>
+              <Route path="/about" element={<About />} />
+              <Route path="/*" element={<Missing />} />
+              </Route>
+            </Routes> */
   );
 }
 

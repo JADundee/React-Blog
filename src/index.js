@@ -19,7 +19,7 @@ const root = createRoot(container);
 ); */
 
 root.render(
-  <React.StrictMode>
+
     <StoreProvider store={store}>
       <Router>
         <Routes>
@@ -27,7 +27,7 @@ root.render(
         </Routes>
       </Router>
     </StoreProvider>
-  </React.StrictMode>,
+  
  /*  document.getElementById('root') */
 );
 

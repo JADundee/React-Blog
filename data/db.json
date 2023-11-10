@@ -1,28 +1,22 @@
 {
-    "posts": [
-        {
-            "id": 1,
-            "title": "1st post",
-            "datetime": "July 15, 2023 11:40:30 AM",
-            "body": "lorem ipsum"
-        },
-        {
-            "id": 2,
-            "title": "Second post",
-            "datetime": "July 15, 2023 11:40:30 AM",
-            "body": "uhhhhh"
-        },
-        {
-            "id": 3,
-            "title": "Number Three",
-            "datetime": "July 15, 2023 11:40:30 AM",
-            "body": "twentyerwerwe"
-        },
-        {
-            "id": 4,
-            "title": "4th test",
-            "datetime": "July 15, 2023 11:40:30 AM",
-            "body": "addspec"
-        }
-    ]
+  "posts": [
+    {
+      "id": 1,
+      "title": "1st post",
+      "datetime": "July 15, 2023 11:40:30 AM",
+      "body": "lorem ipsum"
+    },
+    {
+      "id": 2,
+      "title": "Second post",
+      "datetime": "July 15, 2023 11:40:30 AM",
+      "body": "uhhhhh"
+    },
+    {
+      "id": 3,
+      "title": "Number Three",
+      "datetime": "July 15, 2023 11:40:30 AM",
+      "body": "twentyerwerwe"
+    }
+  ]
 }

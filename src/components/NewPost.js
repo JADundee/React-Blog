@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStoreState, useStoreActions } from 'easy-peasy'
 import { format } from 'date-fns'
@@ -14,7 +13,7 @@ const NewPost = () => {
     const setPostBody = useStoreActions((actions) => actions.setPostBody)
 
     const handleSubmit = (e) => {
-        e.preventDefualt()
+        e.preventDefault()
         const id = posts.length ? posts[posts.length - 1].id + 1 : 1
         const datetime = format(new Date(), 'MMMM dd, yyyy pp')
         const newPost = { id, title: postTitle, datetime, body: postBody }
@@ -40,7 +39,7 @@ const NewPost = () => {
                 required
                 value={postBody}
                 onChange={(e) => setPostBody(e.target.value)}
-            ></textarea>
+            />
             <button type='submit'>Submit</button>
         </form>
     </main>

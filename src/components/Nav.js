@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useStoreState, useStoreActions } from 'easy-peasy'
@@ -10,7 +9,7 @@ const Nav = () => {
     const setSearchResults = useStoreActions((actions) => actions.setSearchResults)
 
     useEffect(() => {
-        const filteredResults = posts.filter(post => 
+        const filteredResults = posts.filter((post) => 
           ((post.body).toLowerCase()).includes(search.toLowerCase())
           || ((post.title).toLowerCase()).includes(search.toLowerCase())
           )
@@ -36,9 +35,9 @@ const Nav = () => {
             />
         </form>
         <ul>
-            <li><Link to='/' />Home</li>
-            <li><Link to='/post' />Post</li>
-            <li><Link to='/about' />About</li>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/post'>Post</Link></li>
+            <li><Link to='/about'>About</Link></li>
         </ul>
     </nav>
   )

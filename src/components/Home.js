@@ -1,8 +1,7 @@
-import React from 'react'
 import Feed from './Feed'
 import { useStoreState } from 'easy-peasy'
 
-const Home = ({ isLoading, fetchError}) => {
+const Home = ({ isLoading, fetchError }) => {
   const searchResults = useStoreState((state) => state.searchResults);
 
   return (

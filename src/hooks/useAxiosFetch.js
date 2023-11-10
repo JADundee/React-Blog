@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useAxiosFetch = (dataURL) => {
+const useAxiosFetch = (dataUrl) => {
     const [data, setData] = useState([])
     const [fetchError, setFetchError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -30,7 +30,7 @@ const useAxiosFetch = (dataURL) => {
         }
     }
 
-        fetchData(dataURL)
+        fetchData(dataUrl)
 
         const cleanUp = () => {
             isMounted = false
@@ -38,7 +38,7 @@ const useAxiosFetch = (dataURL) => {
         }
 
     return cleanUp
-    }, [dataURL])
+    }, [dataUrl])
 
     return { data, fetchError, isLoading }
 }
