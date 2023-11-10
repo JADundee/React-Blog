@@ -32,6 +32,7 @@ function App() {
       fetchError={fetchError}
       />} />
       <Route path="post">
+        <Route path=":id/edit" element={<EditPost />} />
         <Route index element={<NewPost/>} />
         <Route path="edit/:id" element={ <EditPost />} />
         <Route path=":id" element={<PostPage />} />

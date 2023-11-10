@@ -1,4 +1,3 @@
-import React from 'react'
 import { useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
@@ -53,7 +52,7 @@ const EditPost = () => {
                 required
                 value={editBody}
                 onChange={(e) => setEditBody(e.target.value)}
-            ></textarea>
+            />
             <button type='button' onClick={() => handleEdit(post.id)}>Submit</button>
         </form>
         </>
